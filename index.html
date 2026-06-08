@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1er Salon de la Rencontre Célibataire — Les Sables-d’Olonne 27 & 28 février 2027</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Bai+Jamjuree:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --violet: #9B59B6;
+    --fuchsia: #E91E8C;
+    --turquoise: #00BCD4;
+    --ink: #1a1a2e;
+    --white: #FAFAFA;
+    --border: #d4b8e8;
+    --soft: #f5eeff;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Bai Jamjuree', sans-serif; background: var(--white); color: var(--ink); }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    background: rgba(26,26,46,0.95); backdrop-filter: blur(10px);
+    padding: 0 40px; display: flex; align-items: center; justify-content: space-between;
+    height: 60px; border-bottom: 1px solid rgba(155,89,182,0.2);
+  }
+  .nav-brand { font-family: 'Cormorant Garamond', serif; font-size: 1rem; color: #e8c5f5; letter-spacing: 0.05em; }
+  .nav-links { display: flex; gap: 28px; }
+  .nav-links a { font-size: 0.7rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(250,250,250,0.6); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--turquoise); }
+  .nav-cta { background: linear-gradient(90deg, var(--violet), var(--fuchsia)); color: white !important; padding: 8px 18px; border-radius: 3px; font-size: 0.7rem !important; font-weight: 600 !important; }
+
+  .hero {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #0d0d1a 0%, #1a1a2e 40%, #2d1b4e 70%, #1a1a2e 100%);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    text-align: center; padding: 100px 24px 80px; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse at 20% 50%, rgba(155,89,182,0.2) 0%, transparent 55%),
+                radial-gradient(ellipse at 80% 30%, rgba(233,30,140,0.12) 0%, transparent 55%),
+                radial-gradient(ellipse at 50% 80%, rgba(0,188,212,0.08) 0%, transparent 50%);
+  }
+  .hero-kicker { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.4em; text-transform: uppercase; color: var(--turquoise); margin-bottom: 24px; position: relative; }
+  .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 300; color: white; line-height: 1.1; position: relative; margin-bottom: 12px; }
+  .hero h1 em { font-style: italic; color: #e8c5f5; }
+  .hero-date { font-size: 0.82rem; color: rgba(250,250,250,0.5); letter-spacing: 0.2em; text-transform: uppercase; position: relative; margin-top: 20px; }
+  .hero-tagline { font-family: 'Cormorant Garamond', serif; font-size: clamp(1rem, 2vw, 1.35rem); font-style: italic; color: rgba(250,250,250,0.7); position: relative; margin-top: 28px; max-width: 600px; line-height: 1.6; }
+  .hero-badges { display: flex; gap: 14px; flex-wrap: wrap; justify-content: center; margin-top: 40px; position: relative; }
+  .badge { padding: 8px 20px; border: 1px solid rgba(255,255,255,0.15); border-radius: 2px; font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(250,250,250,0.7); }
+  .badge.highlight { border-color: rgba(233,30,140,0.5); color: #f9a8d4; }
+  .hero-cta { margin-top: 50px; display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; position: relative; }
+  .btn-main { display: inline-block; padding: 16px 40px; background: linear-gradient(90deg, var(--violet), var(--fuchsia)); color: white; text-decoration: none; font-family: 'Bai Jamjuree', sans-serif; font-size: 0.8rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; border-radius: 3px; box-shadow: 0 8px 30px rgba(155,89,182,0.4); transition: all 0.2s; }
+  .btn-main:hover { transform: translateY(-2px); box-shadow: 0 12px 40px rgba(155,89,182,0.5); }
+  .btn-ghost { display: inline-block; padding: 16px 40px; border: 1px solid rgba(255,255,255,0.2); color: rgba(255,255,255,0.7); text-decoration: none; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; border-radius: 3px; transition: all 0.2s; }
+  .btn-ghost:hover { border-color: rgba(255,255,255,0.5); color: white; }
+  .scroll-ind { position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: center; gap: 8px; color: rgba(255,255,255,0.3); font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase; }
+  .scroll-ind::after { content: ''; width: 1px; height: 40px; background: linear-gradient(to bottom, rgba(155,89,182,0.6), transparent); animation: scrollPulse 2s ease-in-out infinite; }
+  @keyframes scrollPulse { 0%,100%{opacity:0.3} 50%{opacity:1} }
+
+  section { padding: 90px 24px; }
+  .container { max-width: 960px; margin: 0 auto; }
+  .section-label { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.35em; text-transform: uppercase; color: var(--violet); margin-bottom: 14px; }
+  .section-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; line-height: 1.15; margin-bottom: 20px; }
+  .section-title em { font-style: italic; color: var(--violet); }
+  .section-lead { font-size: 0.92rem; line-height: 1.8; color: #444; max-width: 640px; }
+
+  .concept { background: white; }
+  .concept-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; margin-top: 56px; }
+  @media(max-width:700px){ .concept-grid { grid-template-columns: 1fr; gap: 40px; } }
+  .concept-text p { font-size: 0.9rem; line-height: 1.9; color: #444; margin-bottom: 18px; }
+  .concept-visual { background: linear-gradient(135deg, #1a1a2e, #2d1b4e); border-radius: 8px; padding: 40px; text-align: center; }
+  .concept-visual .big-num { font-family: 'Cormorant Garamond', serif; font-size: 5rem; font-weight: 300; color: white; line-height: 1; margin-bottom: 6px; }
+  .concept-visual .big-label { font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(250,250,250,0.5); margin-bottom: 28px; }
+  .stat-row { display: flex; justify-content: space-around; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); }
+  .stat { text-align: center; }
+  .stat .val { font-family: 'Cormorant Garamond', serif; font-size: 2rem; font-weight: 400; color: #e8c5f5; }
+  .stat .lbl { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(250,250,250,0.4); margin-top: 4px; }
+
+  .pourquoi { background: var(--soft); }
+  .cards-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 52px; }
+  @media(max-width:800px){ .cards-grid { grid-template-columns: 1fr; } }
+  .card { background: white; border-radius: 8px; padding: 32px 28px; border: 1px solid var(--border); transition: transform 0.2s, box-shadow 0.2s; }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(155,89,182,0.12); }
+  .card-icon { width: 44px; height: 44px; background: linear-gradient(135deg, var(--violet), var(--fuchsia)); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; font-size: 1.3rem; }
+  .card h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 600; margin-bottom: 10px; color: var(--ink); }
+  .card p { font-size: 0.82rem; line-height: 1.7; color: #555; }
+
+  .programme { background: white; }
+  .prog-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 52px; }
+  @media(max-width:700px){ .prog-cols { grid-template-columns: 1fr; } }
+  .prog-day-label { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.25em; text-transform: uppercase; color: var(--fuchsia); margin-bottom: 20px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .timeline { position: relative; padding-left: 28px; border-left: 2px solid var(--border); }
+  .timeline-item { margin-bottom: 28px; position: relative; }
+  .timeline-item::before { content: ''; width: 10px; height: 10px; background: var(--violet); border-radius: 50%; position: absolute; left: -34px; top: 5px; border: 2px solid white; box-shadow: 0 0 0 2px var(--violet); }
+  .timeline-time { font-size: 0.7rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--violet); margin-bottom: 4px; }
+  .timeline-title { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+  .timeline-desc { font-size: 0.8rem; line-height: 1.6; color: #666; }
+
+  .conferences { background: var(--soft); }
+  .conf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-top: 40px; }
+  @media(max-width:700px){ .conf-grid { grid-template-columns: 1fr; } }
+  .conf-day { background: white; border-radius: 8px; border: 1px solid var(--border); overflow: hidden; }
+  .conf-day-head { background: linear-gradient(90deg, var(--violet), var(--fuchsia)); padding: 14px 20px; color: white; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; }
+  .conf-day-head.dark { background: linear-gradient(90deg, #1a1a2e, #2d1b4e); }
+  .conf-slots { padding: 18px 20px; }
+  .conf-slot { display: flex; align-items: center; gap: 14px; padding: 10px 0; border-bottom: 1px solid rgba(155,89,182,0.08); }
+  .conf-slot:last-child { border-bottom: none; }
+  .conf-time { font-size: 0.82rem; font-weight: 600; color: var(--violet); min-width: 48px; letter-spacing: 0.05em; }
+  .conf-label { font-size: 0.8rem; color: #666; }
+  .conf-avail { margin-left: auto; font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--turquoise); }
+  .conf-note { margin-top: 20px; font-size: 0.78rem; color: #888; font-style: italic; line-height: 1.6; }
+
+  /* TARIFS */
+  .tarifs { background: white; }
+  .tarif-phase { margin-bottom: 32px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .tarif-phase-head { padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; }
+  .tarif-phase-head.early { background: linear-gradient(90deg, #1a3a2e, #1b4e2d); }
+  .tarif-phase-head.mid { background: linear-gradient(90deg, #1a1a2e, #2d1b4e); }
+  .tarif-phase-head.late { background: linear-gradient(90deg, #2d1a1a, #4e1b2d); }
+  .tarif-phase-head h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; color: white; }
+  .tarif-phase-head .deadline { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+  .tarif-phase-body { padding: 0; }
+  .tarif-row { display: flex; justify-content: space-between; align-items: center; padding: 16px 24px; border-bottom: 1px solid var(--border); }
+  .tarif-row:last-child { border-bottom: none; }
+  .tarif-row-label { font-size: 0.88rem; color: var(--ink); }
+  .tarif-row-label span { display: block; font-size: 0.75rem; color: #888; margin-top: 2px; }
+  .tarif-row-price { font-family: 'Cormorant Garamond', serif; font-size: 1.5rem; font-weight: 600; color: var(--violet); }
+  .tarif-option-block { margin-top: 20px; border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .tarif-option-head { background: linear-gradient(90deg, #1a2a2e, #1b3d4e); padding: 14px 24px; display: flex; justify-content: space-between; align-items: center; }
+  .tarif-option-head h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; color: white; }
+  .tarif-option-head .price { font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; color: #e8c5f5; font-weight: 300; }
+  .tarif-option-body { padding: 16px 24px; font-size: 0.82rem; color: #555; line-height: 1.8; background: var(--soft); }
+  .tarif-tva { margin-top: 20px; font-size: 0.78rem; color: #888; font-style: italic; }
+  .tarif-annulation { margin-top: 16px; padding: 16px 20px; background: rgba(155,89,182,0.06); border: 1px solid var(--border); border-radius: 6px; font-size: 0.8rem; color: #555; line-height: 1.7; }
+  .paiement-block { margin-top: 16px; padding: 20px 24px; background: white; border: 1px solid var(--border); border-radius: 8px; }
+  .paiement-block .paiement-title { font-size: 0.72rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--violet); margin-bottom: 14px; }
+  .paiement-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(180px,1fr)); gap: 10px; font-size: 0.84rem; color: #555; }
+  .paiement-item { display: flex; align-items: center; gap: 10px; }
+
+  .lieu { background: #1a1a2e; }
+  .lieu .section-title { color: white; }
+  .lieu .section-title em { color: #e8c5f5; }
+  .lieu .section-label { color: var(--turquoise); }
+  .lieu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; margin-top: 52px; align-items: start; }
+  @media(max-width:700px){ .lieu-grid { grid-template-columns: 1fr; } }
+  .lieu-detail { display: flex; gap: 14px; align-items: flex-start; margin-bottom: 18px; }
+  .lieu-detail-icon { width: 36px; height: 36px; flex-shrink: 0; background: rgba(155,89,182,0.15); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+  .lieu-detail-text strong { display: block; font-size: 0.78rem; color: rgba(250,250,250,0.5); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 3px; }
+  .lieu-detail-text span { font-size: 0.88rem; color: rgba(250,250,250,0.85); line-height: 1.5; }
+  .lieu-map { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 8px; overflow: hidden; height: 280px; }
+  .lieu-map iframe { width: 100%; height: 100%; border: none; }
+
+  .lili-section { background: white; }
+  .lili-grid { display: grid; grid-template-columns: 200px 1fr; gap: 52px; align-items: start; margin-top: 52px; }
+  @media(max-width:700px){ .lili-grid { grid-template-columns: 1fr; } }
+  .lili-avatar { width: 180px; height: 180px; border-radius: 50%; background: linear-gradient(135deg, var(--violet), var(--fuchsia)); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 4rem; color: white; font-weight: 300; font-style: italic; flex-shrink: 0; }
+  .lili-text p { font-size: 0.9rem; line-height: 1.9; color: #444; margin-bottom: 16px; }
+  .lili-tags { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 22px; }
+  .lili-tag { padding: 5px 14px; background: var(--soft); border: 1px solid var(--border); border-radius: 2px; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--violet); }
+
+  .cta-final { background: linear-gradient(135deg, #1a1a2e 0%, #2d1b4e 50%, #1a1a2e 100%); text-align: center; padding: 100px 24px; position: relative; overflow: hidden; }
+  .cta-final::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 50% 50%, rgba(155,89,182,0.2) 0%, transparent 60%); }
+  .cta-final h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; color: white; position: relative; margin-bottom: 14px; }
+  .cta-final h2 em { font-style: italic; color: #e8c5f5; }
+  .cta-final p { font-size: 0.88rem; color: rgba(250,250,250,0.55); position: relative; margin-bottom: 40px; line-height: 1.7; }
+  .cta-final .btn-main { position: relative; font-size: 0.85rem; padding: 18px 50px; }
+
+  /* BULLE CONTACT */
+  .contact-bubble { position: fixed; bottom: 28px; right: 28px; z-index: 200; }
+  .contact-btn { width: 56px; height: 56px; background: linear-gradient(135deg, var(--violet), var(--fuchsia)); border-radius: 50%; border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 24px rgba(155,89,182,0.45); transition: transform 0.2s, box-shadow 0.2s; color: white; font-size: 1.4rem; }
+  .contact-btn:hover { transform: scale(1.08); box-shadow: 0 10px 32px rgba(155,89,182,0.55); }
+  .contact-panel { position: absolute; bottom: 68px; right: 0; width: 320px; background: white; border-radius: 12px; box-shadow: 0 16px 48px rgba(0,0,0,0.15); border: 1px solid var(--border); overflow: hidden; display: none; }
+  .contact-panel.open { display: block; animation: panelIn 0.2s ease; }
+  @keyframes panelIn { from{opacity:0;transform:scale(0.92)} to{opacity:1;transform:scale(1)} }
+  .contact-panel-head { background: linear-gradient(90deg, var(--violet), var(--fuchsia)); padding: 16px 20px; display: flex; justify-content: space-between; align-items: center; }
+  .contact-panel-head h4 { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 400; color: white; }
+  .contact-close { background: none; border: none; color: rgba(255,255,255,0.7); cursor: pointer; font-size: 1.2rem; line-height: 1; }
+  .contact-form-inner { padding: 20px; }
+  .contact-field { margin-bottom: 12px; }
+  .contact-field input, .contact-field textarea { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 4px; font-family: 'Bai Jamjuree', sans-serif; font-size: 0.82rem; color: var(--ink); background: var(--soft); outline: none; transition: border-color 0.2s; }
+  .contact-field input:focus, .contact-field textarea:focus { border-color: var(--violet); background: white; }
+  .contact-field textarea { height: 80px; resize: none; }
+  .contact-submit { width: 100%; padding: 12px; background: linear-gradient(90deg, var(--violet), var(--fuchsia)); color: white; border: none; border-radius: 4px; font-family: 'Bai Jamjuree', sans-serif; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; transition: opacity 0.2s; }
+  .contact-submit:hover { opacity: 0.88; }
+  .contact-rgpd { font-size: 0.68rem; color: #999; text-align: center; margin-top: 10px; line-height: 1.5; }
+  .contact-confirm { display: none; padding: 24px 20px; text-align: center; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1rem; color: var(--violet); }
+  @media(max-width:600px){ nav { padding: 0 16px; } .nav-links { display: none; } .contact-panel { width: calc(100vw - 56px); } }
+
+  footer { background: #0d0d1a; padding: 36px 24px; text-align: center; }
+  .footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; color: #e8c5f5; margin-bottom: 8px; }
+  .footer-info { font-size: 0.75rem; color: rgba(250,250,250,0.4); line-height: 1.8; }
+  .footer-social { display: flex; justify-content: center; gap: 14px; margin-top: 18px; }
+  .footer-social a { display: inline-flex; align-items: center; gap: 7px; padding: 7px 16px; border: 1px solid rgba(255,255,255,0.1); border-radius: 3px; font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(250,250,250,0.5); text-decoration: none; transition: all 0.2s; }
+  .footer-social a:hover { border-color: var(--violet); color: var(--violet); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Les Cœurs Solitaires</div>
+  <div class="nav-links">
+    <a href="#concept">Le salon</a>
+    <a href="#pourquoi">Exposer</a>
+    <a href="#programme">Programme</a>
+    <a href="#conferences">Conférences</a>
+    <a href="#tarifs">Tarifs</a>
+    <a href="#lieu">Lieu</a>
+    <a href="#lili">L’organisatrice</a>
+    <a href="[LIEN_CONTRAT_SABLES]" target="_blank" class="nav-cta">Je réserve ma place</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-kicker">Les Sables-d’Olonne &mdash; 27 &amp; 28 février 2027</div>
+  <h1>1<sup style="font-size:0.4em;vertical-align:super">er</sup> Salon de la<br><em>Rencontre Célibataire</em></h1>
+  <div class="hero-tagline">&laquo;&nbsp;La rencontre mérite mieux qu’un algorithme.&nbsp;&raquo;</div>
+  <div class="hero-date">Palais des Congrès Les Atlantes &mdash; Samedi 27 &amp; Dimanche 28 février 2027</div>
+  <div class="hero-badges">
+    <div class="badge">2 jours</div>
+    <div class="badge highlight">Première édition</div>
+    <div class="badge">30 exposants max</div>
+    <div class="badge">Pays de Loire</div>
+    <div class="badge">Vendée</div>
+  </div>
+  <div class="hero-cta">
+    <a href="[LIEN_CONTRAT_SABLES]" target="_blank" class="btn-main">Réserver mon emplacement</a>
+    <a href="#concept" class="btn-ghost">Découvrir</a>
+  </div>
+  <div class="scroll-ind">Découvrir</div>
+</div>
+
+<!-- CONCEPT -->
+<section class="concept" id="concept">
+  <div class="container">
+    <div class="section-label">Le concept</div>
+    <h2 class="section-title">Un événement<br><em>inédit en Vendée</em></h2>
+    <div class="concept-grid">
+      <div class="concept-text">
+        <p>Le 1<sup>er</sup> Salon de la Rencontre Célibataire investit le Palais des Congrès Les Atlantes pour deux journées consécutives. Professionnels du bien-être, coachs, thérapeutes, auteurs et créateurs se réunissent autour d’un public ciblé : les cœurs solitaires en quête d’authenticité.</p>
+        <p>Deux jours pour créer du lien, transmettre votre expertise et rencontrer un public engagé qui cherche du sens dans ses relations. Ni une foire, ni un simple marché : un espace de rencontre humaine, conçu avec intention.</p>
+        <p>Des conférences et ateliers sont proposés tout au long du week-end. Les créneaux sont attribués selon l’ordre d’inscription. Chaque intervenant dispose d’une heure pour transmettre, partager et marquer les esprits.</p>
+      </div>
+      <div class="concept-visual">
+        <div class="big-num">2</div>
+        <div class="big-label">jours de salon</div>
+        <div class="stat-row">
+          <div class="stat"><div class="val">30</div><div class="lbl">exposants max</div></div>
+          <div class="stat"><div class="val">1</div><div class="lbl">première édition</div></div>
+          <div class="stat"><div class="val">Vendée</div><div class="lbl">Pays de Loire</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- POURQUOI EXPOSER -->
+<section class="pourquoi" id="pourquoi">
+  <div class="container">
+    <div class="section-label">Pourquoi exposer ?</div>
+    <h2 class="section-title">Ce que le salon<br><em>vous apporte</em></h2>
+    <div class="cards-grid">
+      <div class="card"><div class="card-icon">&#127919;</div><h3>Un public ultra-qualifié</h3><p>Des célibataires actifs, curieux et ouverts à l’accompagnement. Ils viennent chercher du sens, pas des algorithmes.</p></div>
+      <div class="card"><div class="card-icon">&#127908;</div><h3>Une tribune pour votre expertise</h3><p>Proposez une conférence ou un atelier d’1 heure devant un public dédié. Inclus dans votre emplacement. Premiers arrivés, premiers servis.</p></div>
+      <div class="card"><div class="card-icon">&#128279;</div><h3>Visibilité et réseau</h3><p>Communication dédiée dans le programme officiel, présence sur les réseaux Les Cœurs Solitaires (2 500+ membres actifs en Pays de Loire).</p></div>
+      <div class="card"><div class="card-icon">&#129309;</div><h3>Deux jours de contact</h3><p>Un week-end entier pour tisser des liens avec votre public et vos futurs partenaires. Une vitrine professionnelle sur la durée.</p></div>
+      <div class="card"><div class="card-icon">&#11088;</div><h3>Un cadre d’exception</h3><p>Le Palais des Congrès Les Atlantes, en bord de mer aux Sables-d’Olonne. Un lieu chargé de lumière et d’énergie atlantique.</p></div>
+      <div class="card"><div class="card-icon">&#128227;</div><h3>Zéro commission</h3><p>L’organisatrice ne prélève aucun pourcentage sur vos ventes ou prestations. Ce que vous générez vous appartient entièrement.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMME -->
+<section class="programme" id="programme">
+  <div class="container">
+    <div class="section-label">Programme</div>
+    <h2 class="section-title">Le week-end<br><em>en un coup d’œil</em></h2>
+    <div class="prog-cols">
+      <div>
+        <div class="prog-day-label">&#128197; Samedi 27 février</div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-time">08h30</div>
+            <div class="timeline-title">Installation des stands</div>
+            <div class="timeline-desc">Accueil des exposants, installation et petit-déjeuner d’accueil offert.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">10h00</div>
+            <div class="timeline-title">Ouverture au public</div>
+            <div class="timeline-desc">Les portes ouvrent aux visiteurs.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">10h30</div>
+            <div class="timeline-title">Début des conférences &amp; ateliers</div>
+            <div class="timeline-desc">Créneaux d’1 heure. Attribution par ordre d’inscription.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">19h00</div>
+            <div class="timeline-title">Fermeture du salon</div>
+            <div class="timeline-desc">Fin d’accueil du public.</div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="prog-day-label" style="color:var(--turquoise);">&#128197; Dimanche 28 février</div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="timeline-time">09h30</div>
+            <div class="timeline-title">Ouverture exposants</div>
+            <div class="timeline-desc">Remise en place et petit-déjeuner d’accueil offert.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">10h00</div>
+            <div class="timeline-title">Ouverture au public</div>
+            <div class="timeline-desc">Deuxième journée ouverte aux visiteurs.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">10h00 &mdash; 17h00</div>
+            <div class="timeline-title">Conférences &amp; ateliers</div>
+            <div class="timeline-desc">Créneaux tout au long de la journée. Attribution par ordre d’inscription.</div>
+          </div>
+          <div class="timeline-item">
+            <div class="timeline-time">17h00</div>
+            <div class="timeline-title">Fermeture au public</div>
+            <div class="timeline-desc">Démontage des stands de 17h à 18h.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:32px;padding:16px 22px;background:rgba(0,188,212,0.06);border:1px solid rgba(0,188,212,0.2);border-radius:6px;font-size:0.82rem;color:#555;line-height:1.7;">
+      <strong style="color:var(--turquoise);">Programme d’animation</strong> en cours d’élaboration. Ateliers de rencontre thématiques prévus tout au long du week-end.
+    </div>
+  </div>
+</section>
+
+<!-- CONFERENCES -->
+<section class="conferences" id="conferences">
+  <div class="container">
+    <div class="section-label">Conférences &amp; ateliers</div>
+    <h2 class="section-title">Vos créneaux<br><em>pour prendre la parole</em></h2>
+    <p class="section-lead">Conférences et ateliers d’1 heure inclus dans votre emplacement. Attribution par ordre d’inscription. Premiers arrivés, premiers servis.</p>
+    <div class="conf-grid">
+      <div class="conf-day">
+        <div class="conf-day-head">Samedi 27 février &mdash; dès 10h30</div>
+        <div class="conf-slots">
+          <div class="conf-slot"><div class="conf-time">10h30</div><div class="conf-label">Atelier ou conférence</div><div class="conf-avail">Disponible</div></div>
+          <div class="conf-slot"><div class="conf-time">11h30</div><div class="conf-label">Atelier ou conférence</div><div class="conf-avail">Disponible</div></div>
+          <div class="conf-slot"><div class="conf-time">13h30</div><div class="conf-label">Atelier ou conférence</div><div class="conf-avail">Disponible</div></div>
+          <div class="conf-slot"><div class="conf-time">14h30</div><div class="conf-label">Atelier ou conférence</div><div class="conf-avail">Disponible</div></div>
+          <div class="conf-slot"><div class="conf-time">15h30</div><div class="conf-label">Atelier ou conférence</div><div class="conf-avail">Disponible</div></div>
+          <div class="conf-slot"><div class="conf-time">16h30</div><div class="conf-label">Atelier ou conférence</div><div class="conf-avail">Disponible</div></div>
+          <div class="conf-slot"><div class="conf-time">17h30</div><div class="conf-label">Atelier ou conférence</div><div class="conf-avail">Disponible</div></div>
+        </div>
+      </div>
+      <div class="conf-day">
+        <div class="conf-day-head dark">Dimanche 28 février &mdash; toute la journée</div>
+        <div class="conf-slots">
+          <div class="conf-slot"><div class="conf-time">10h00</div><div class="conf-label">Atelier ou conférence</div><div class="conf-avail">Disponible</div></div>
+          <div class="conf-slot"><div class="conf-time">11h00</div><div class="conf-label">Atelier ou conférence</div><div class="conf-avail">Disponible</div></div>
+          <div class="conf-slot"><div class="conf-time">13h00</div><div class="conf-label">Atelier ou conférence</div><div class="conf-avail">Disponible</div></div>
+          <div class="conf-slot"><div class="conf-time">14h00</div><div class="conf-label">Atelier ou conférence</div><div class="conf-avail">Disponible</div></div>
+          <div class="conf-slot"><div class="conf-time">15h00</div><div class="conf-label">Atelier ou conférence</div><div class="conf-avail">Disponible</div></div>
+          <div class="conf-slot"><div class="conf-time">16h00</div><div class="conf-label">Atelier ou conférence</div><div class="conf-avail">Disponible</div></div>
+        </div>
+      </div>
+    </div>
+    <p class="conf-note">Les créneaux débutent à 10h30 les deux jours. Ceux du dimanche sont répartis sur toute la journée. Attribution strictement par ordre d’inscription.</p>
+  </div>
+</section>
+
+<!-- TARIFS -->
+<section class="tarifs" id="tarifs">
+  <div class="container">
+    <div class="section-label">Tarifs</div>
+    <h2 class="section-title">Des tarifs<br><em>qui récompensent les premières inscriptions</em></h2>
+    <p class="section-lead">Plus vous vous inscrivez tôt, plus vous bénéficiez d’un tarif avantageux. L’emplacement avec conférence est délibérément proposé à un tarif inférieur pour encourager la prise de parole. Table 1 m + 2 chaises incluses. Petit-déjeuner offert les deux jours.</p>
+
+    <div class="tarif-phase">
+      <div class="tarif-phase-head early">
+        <h3>Tarif lancement</h3>
+        <div class="deadline">Jusqu’au 30 août 2026</div>
+      </div>
+      <div class="tarif-phase-body">
+        <div class="tarif-row">
+          <div class="tarif-row-label">Emplacement seul<span>Table 1 m + 2 chaises</span></div>
+          <div class="tarif-row-price">190&nbsp;€</div>
+        </div>
+        <div class="tarif-row" style="background:rgba(0,188,212,0.04);">
+          <div class="tarif-row-label">Emplacement + conférence ou atelier (1h)<span>Premiers arrivés, premiers servis &mdash; tarif incitant à prendre la parole</span></div>
+          <div class="tarif-row-price" style="color:var(--fuchsia);">120&nbsp;€</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tarif-phase">
+      <div class="tarif-phase-head mid">
+        <h3>Tarif standard</h3>
+        <div class="deadline">Jusqu’au 30 octobre 2026</div>
+      </div>
+      <div class="tarif-phase-body">
+        <div class="tarif-row">
+          <div class="tarif-row-label">Emplacement seul<span>Table 1 m + 2 chaises</span></div>
+          <div class="tarif-row-price">240&nbsp;€</div>
+        </div>
+        <div class="tarif-row" style="background:rgba(0,188,212,0.04);">
+          <div class="tarif-row-label">Emplacement + conférence ou atelier (1h)<span>Premiers arrivés, premiers servis &mdash; tarif incitant à prendre la parole</span></div>
+          <div class="tarif-row-price" style="color:var(--fuchsia);">170&nbsp;€</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tarif-phase">
+      <div class="tarif-phase-head late">
+        <h3>Tarif tardif</h3>
+        <div class="deadline">À partir du 31 octobre 2026</div>
+      </div>
+      <div class="tarif-phase-body">
+        <div class="tarif-row">
+          <div class="tarif-row-label">Emplacement seul<span>Table 1 m + 2 chaises</span></div>
+          <div class="tarif-row-price">300&nbsp;€</div>
+        </div>
+        <div class="tarif-row" style="background:rgba(0,188,212,0.04);">
+          <div class="tarif-row-label">Emplacement + conférence ou atelier (1h)<span>Premiers arrivés, premiers servis &mdash; tarif incitant à prendre la parole</span></div>
+          <div class="tarif-row-price" style="color:var(--fuchsia);">230&nbsp;€</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tarif-option-block">
+      <div class="tarif-option-head">
+        <h3>Forfait électricité</h3>
+        <div class="price">+ 39&nbsp;€</div>
+      </div>
+      <div class="tarif-option-body">Supplément pour branchement électrique sur votre emplacement. À ajouter à votre formule.</div>
+    </div>
+
+    <div class="tarif-option-block" style="margin-top:16px;">
+      <div class="tarif-option-head" style="background:linear-gradient(90deg,#1a2a2e,#1b3d4e);">
+        <h3>Distribution de flyers &mdash; 400 pochettes</h3>
+        <div class="price">39&nbsp;€</div>
+      </div>
+      <div class="tarif-option-body">Réservé aux professionnels ne souhaitant pas tenir un stand. Vos flyers ou cartes de visite sont glissés dans les 400 pochettes d’accueil remises à chaque visiteur à l’entrée du salon. Une visibilité garantie sans être présent le jour J.<br>Dépôt : samedi 27 février au Palais des Congrès de 9h à 11h, ou expédition à vos frais : Lili Karantez<sup>&reg;</sup>, Centre des Affaires Lorient La Base, 1 rue Étienne d’Orves, 56100 Lorient.</div>
+    </div>
+
+    <p class="tarif-tva">TVA non applicable, article 293 B du CGI.</p>
+    <div class="tarif-annulation">
+      <strong style="color:var(--violet);">Important :</strong> aucun emplacement n’est bloqué sans paiement. Maximum 30 exposants professionnels. Les places sont attribuées par ordre de réception du contrat signé et du règlement.
+    </div>
+    <div class="paiement-block">
+      <div class="paiement-title">Modes de paiement acceptés</div>
+      <div class="paiement-grid">
+        <div class="paiement-item"><span style="font-size:1.2rem;">&#128242;</span> Wero</div>
+        <div class="paiement-item"><span style="font-size:1.2rem;">&#128196;</span> Chèque à l’ordre de Lili Karantez</div>
+        <div class="paiement-item"><span style="font-size:1.2rem;">&#127968;</span> Virement &mdash; RIB sur demande</div>
+        <div class="paiement-item"><span style="font-size:1.2rem;">&#128197;</span> Paiement en 2 fois &mdash; échéancier à convenir</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LIEU -->
+<section class="lieu" id="lieu">
+  <div class="container">
+    <div class="section-label">Le lieu</div>
+    <h2 class="section-title">Palais des Congrès<br><em>Les Atlantes</em></h2>
+    <div class="lieu-grid">
+      <div>
+        <div class="lieu-detail">
+          <div class="lieu-detail-icon">&#128205;</div>
+          <div class="lieu-detail-text">
+            <strong>Adresse</strong>
+            <span>1 promenade Wilson<br>85100 Les Sables-d’Olonne</span>
+          </div>
+        </div>
+        <div class="lieu-detail">
+          <div class="lieu-detail-icon">&#128336;</div>
+          <div class="lieu-detail-text">
+            <strong>Horaires</strong>
+            <span>Samedi 27 février : ouverture à 11h00<br>Installation exposants dès 9h00<br>Dimanche 28 février : 10h00 à 18h00<br>Démontage de 18h à 19h</span>
+          </div>
+        </div>
+        <div class="lieu-detail">
+          <div class="lieu-detail-icon">&#127961;</div>
+          <div class="lieu-detail-text">
+            <strong>Situation</strong>
+            <span>En bord de mer, face à l’Atlantique<br>Accès facilité, parking à proximité</span>
+          </div>
+        </div>
+        <div style="margin-top:6px;">
+          <a href="https://www.lesatlantes.com/" target="_blank" style="font-size:0.78rem;color:var(--turquoise);text-decoration:none;letter-spacing:0.1em;">lesatlantes.com &rarr;</a>
+        </div>
+      </div>
+      <div class="lieu-map">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2724.5!2d-1.7836!3d46.4971!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4803e6b0b0b0b0b0%3A0xabcdef1234567890!2sPalais%20des%20Congr%C3%A8s%20Les%20Atlantes%2C%201%20Promenade%20Wilson%2C%2085100%20Les%20Sables-d'Olonne!5e0!3m2!1sfr!2sfr!4v1711900000001!5m2!1sfr!2sfr" allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LILI -->
+<section class="lili-section" id="lili">
+  <div class="container">
+    <div class="section-label">L’organisatrice</div>
+    <h2 class="section-title">Lili Karantez,<br><em>créatrice du concept</em></h2>
+    <div class="lili-grid">
+      <div class="lili-avatar">L</div>
+      <div class="lili-text">
+        <p>Lili Karantez est entrepreneure, auteure et éditrice spécialisée dans les dynamiques amoureuses contemporaines. Fondatrice du concept <em>Cœurs Solitaires</em>, elle imagine et organise depuis 2024 des événements de rencontres à forte dimension humaine dans le Pays de Loire.</p>
+        <p>Son approche repose sur une conviction forte : <em>&laquo;&nbsp;La rencontre mérite un cadre, une intention et une mise en scène subtile.&nbsp;&raquo;</em> Elle anime des communautés actives en Bretagne et Pays de la Loire et publie le magazine <em>Cœurs Solitaires</em>.</p>
+        <div class="lili-tags">
+          <span class="lili-tag">Entrepreneure</span>
+          <span class="lili-tag">Auteure</span>
+          <span class="lili-tag">Éditrice</span>
+          <span class="lili-tag">Créatrice d’événements</span>
+          <span class="lili-tag">Pays de Loire</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<div class="cta-final">
+  <h2>Prêt·e à rejoindre<br><em>l’aventure&nbsp;?</em></h2>
+  <p>30 emplacements seulement. Les premiers inscrits bénéficient du meilleur tarif.<br>Complétez votre contrat d’engagement dès maintenant.</p>
+  <a href="[LIEN_CONTRAT_SABLES]" target="_blank" class="btn-main">Je réserve mon emplacement</a>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Lili Karantez<sup style="font-size:0.6em;vertical-align:super">®</sup> &mdash; Les Cœurs Solitaires</div>
+  <div class="footer-info">
+    Centre des Affaires Lorient La Base &mdash; 1 rue Étienne d’Orves &mdash; 56100 Lorient<br>
+    lilikarantez@gmail.com &nbsp;&middot;&nbsp; SIRET 40149331700069
+  </div>
+  <div class="footer-social">
+    <a href="https://www.facebook.com/lili.karantez.3?locale=fr_FR" target="_blank">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+      Facebook
+    </a>
+    <a href="https://www.instagram.com/lilikarantez/" target="_blank">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
+      Instagram
+    </a>
+  </div>
+  <div style="margin-top:14px;font-size:0.68rem;color:rgba(250,250,250,0.2);">
+    &copy; 2026 Lili Karantez &mdash; Toute reproduction interdite, même partielle. SIRET 40149331700069
+  </div>
+</footer>
+
+<!-- BULLE CONTACT -->
+<div class="contact-bubble">
+  <div class="contact-panel" id="contactPanel">
+    <div class="contact-panel-head">
+      <h4>Nous écrire</h4>
+      <button class="contact-close" id="contactClose">&times;</button>
+    </div>
+    <div class="contact-form-inner" id="contactFormWrap">
+      <form id="contactFormEl">
+        <input type="hidden" name="access_key" value="d42b8d9d-a52c-4888-a489-5dd59b1b0f5b">
+        <input type="hidden" name="subject" value="Message exposant &mdash; Salon Les Sables-d'Olonne 2027">
+        <div class="contact-field"><input type="text" name="nom" placeholder="Nom" required></div>
+        <div class="contact-field"><input type="text" name="prenom" placeholder="Prénom" required></div>
+        <div class="contact-field"><input type="text" name="ville" placeholder="Ville" required></div>
+        <div class="contact-field"><input type="email" name="email" placeholder="Email" required></div>
+        <div class="contact-field"><textarea name="message" placeholder="Votre message" required></textarea></div>
+        <button type="submit" class="contact-submit">Envoyer</button>
+        <p class="contact-rgpd">Vos données nous sont confiées. Elles ne seront jamais vendues, jamais partagées.</p>
+      </form>
+    </div>
+    <div class="contact-confirm" id="contactConfirm">Merci, votre message a bien été envoyé !</div>
+  </div>
+  <button class="contact-btn" id="contactBubbleBtn" aria-label="Nous contacter">&#9993;</button>
+</div>
+
+<script>
+(function() {
+  var btn = document.getElementById('contactBubbleBtn');
+  var panel = document.getElementById('contactPanel');
+  var closeBtn = document.getElementById('contactClose');
+  var form = document.getElementById('contactFormEl');
+  var confirm = document.getElementById('contactConfirm');
+  var formWrap = document.getElementById('contactFormWrap');
+  btn.addEventListener('click', function() { panel.classList.toggle('open'); });
+  closeBtn.addEventListener('click', function() { panel.classList.remove('open'); });
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(form) })
+      .then(function(r) { return r.json(); })
+      .then(function(d) {
+        if (d.success) {
+          formWrap.style.display = 'none';
+          confirm.style.display = 'block';
+          setTimeout(function() { panel.classList.remove('open'); formWrap.style.display = 'block'; confirm.style.display = 'none'; form.reset(); }, 3000);
+        }
+      });
+  });
+})();
+</script>
+
+</body>
+</html>
